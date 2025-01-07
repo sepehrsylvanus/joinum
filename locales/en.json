@@ -1,0 +1,119 @@
+{
+  "menu": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "home": {
+    "nextbtn": "Next",
+    "prevbtn": "Previous",
+    "userbtn": "I'm a User",
+    "ownerbtn": "I'm a Business Owner",
+    "langbtn": "Select Language"
+  },
+  "owner-dashboard": {
+    "title": "Business owners dashboard",
+    "orderbtn": "New Order",
+    "tab-active": "Active",
+    "tab-completed": "Completed",
+    "tab-settings": "Settings",
+    "order-title": "Add your order link",
+    "order-list-title": "Order List",
+    "order-link-title": "Link",
+    "order-amount-title": "Amount",
+    "order-remains-title": "Remains",
+    "order-subscriber-title": "Subscriber Type",
+    "settings-tab-title": "Information",
+    "total-orders-title": "Total Orders",
+    "total-spent-title": "Total Spent",
+    "active-orders-title": "Active Orders",
+    "completed-orders-title": "Completed Orders",
+    "referral-title": "Referral Code",
+    "referral-description": "you will earn 5% of the total price from people you invite who use your referrals.",
+    "share-link": "Share Link",
+    "as-story": "as Story",
+    "total-earn": "Total earn by referrals",
+    "wallet-title": "Wallet",
+    "wallet-placeholder": "Enter your amount",
+    "wallet-description": "Your Balance :",
+    "payment-btn": "Payment",
+    "switch-user-btn": "Switch to User"
+  },
+  "new-order": {
+    "title": "Place a New Order",
+    "description": "*Before filling out the form, ensure you have used the wallet section and have funds in your account.",
+    "step-one-title": "Add @JoiniumBot as an admin in your channel or group. Then, provide us with the username or chat_id.",
+    "step-two-title": "Select the type of subscribers you want",
+    "step-three-title": "Choose your bid price",
+    "step-four-title": "Select the duration for Subscribers to stay in your channel or group",
+    "step-five-title": "Rejoin Delay Settings",
+    "check-placeholder": "chat-id or username or link",
+    "check-btn": "Check"
+  },
+  "intro": [
+    {
+      "title": "Introduction & Language Selection",
+      "description": "Welcome to Joinium, where you can earn money by joining Telegram channels and groups or grow your audience as a business owner. Please select your preferred language to get started.",
+      "subtext": "Select a language and then swipe to begin your journey with Joinium!"
+    },
+    {
+      "title": "Welcome to Joinium!",
+      "description": "Earn money by joining Telegram channels and groups. Discover how you can benefit from our platform, whether you're a user or a business owner.",
+      "subtext": "Swipe to learn more about how Joinium works!"
+    },
+    {
+      "title": "User Dashboard",
+      "description": "Manage your profile, subscriptions, and earnings all in one place. Track your progress, earn badges, and participate in challenges to boost your income.",
+      "subtext": "Swipe to explore more features!"
+    },
+    {
+      "title": "For Business Owners",
+      "description": "Securely manage your ad campaigns, reach more users, and track performance. Our platform ensures your campaigns are protected and effective.",
+      "subtext": "Swipe to learn about our referral system!"
+    },
+    {
+      "title": "Referral System",
+      "description": "Earn more by inviting friends! Get a percentage of their first-month earnings. The more they earn, the more you make!",
+      "subtext": "Swipe to get started!"
+    },
+    {
+      "title": "Get Started!",
+      "description": "Choose your path: Are you here to earn by joining channels, or do you want to grow your audience as a business owner?",
+      "subtext": "Select your role to begin!"
+    }
+  ],
+  "user-dashboard": {
+    "accounts-title": "Account",
+    "normal-status-title": "Normal",
+    "parent-status-title": "Parent",
+    "child-status-title": "Child",
+    "wallet-title": "Wallet",
+    "wallet-placeholder": "USDT-TON Address",
+    "wallet-save-btn": "Save",
+    "send-invite-title": "Send invite request to set as Parent-account",
+    "username-placeholder": "UserID or Username",
+    "referral-title": "Referral Code",
+    "referral-description": "Earn 5% of your referrals’ total earnings for their first month.",
+    "share-link": "Share Link",
+    "as-story": "as Story",
+    "leave-notification-title": "Leave Notification",
+    "nsfw-title": "Show NSFW or +18 contents",
+    "total-child-accounts-title": "Total Child-accounts",
+    "total-joined-all-time-title": "Total Joined All Time",
+    "total-earned-all-time-title": "Total Earned All Time",
+    "total-earn-by-referrals-title": "Total Earn by Referrals",
+    "current-joinium-commission-title": "Current Joinium Commission",
+    "current-joinium-commission-description": "As the number of joins or activity increases, the commission rate decreases. For example, if a channel owner pays $1 for 1,000 subscribers, depending on your account category, our commission will range from 10-25%.",
+    "current-joinium-commission-description2": "when you refer someone to Joinium using your exclusive referral link, you will earn 5% of the total price that user earned for the first month from the person invited by your referral link.",
+    "switch-owner-btn": "Switch to Owner's dashboard",
+    "toast-wallet-successfully-updated": "wallet address updated successfully.",
+    "toast-invite-successfully-updated": "invite user updated successfully.",
+    "toast-settings-successfully-updated": "settings updated successfully."
+
+  },
+  "user-login": {
+    "user-success-login": "you successfully logged in.",
+    "user-fail-login": "login failed. please check your credentials and try again."
+  }
+
+}

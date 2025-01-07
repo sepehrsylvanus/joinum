@@ -1,0 +1,3 @@
+type walletUpdateAddress = {
+    message:string;
+}

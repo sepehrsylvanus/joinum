@@ -1,0 +1,114 @@
+{
+  "menu": {
+    "home": "الصفحة الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "settings": "الإعدادات"
+  },
+  "home": {
+    "nextbtn": "التالي",
+    "prevbtn": "السابق",
+    "userbtn": "أنا مستخدم",
+    "ownerbtn": "أنا صاحب عمل",
+    "langbtn": "اختر اللغة"
+  },
+  "owner-dashboard": {
+    "title": "لوحة تحكم أصحاب الأعمال",
+    "orderbtn": "طلب جديد",
+    "tab-active": "نشط",
+    "tab-completed": "مكتمل",
+    "tab-settings": "الإعدادات",
+    "order-title": "أضف رابط الطلب الخاص بك",
+    "order-link-title": "الرابط",
+    "order-amount-title": "المبلغ",
+    "order-remains-title": "المتبقي",
+    "order-subscriber-title": "نوع المشترك",
+    "settings-tab-title": "معلومات",
+    "total-orders-title": "إجمالي الطلبات",
+    "total-spent-title": "إجمالي الإنفاق",
+    "active-orders-title": "الطلبات النشطة",
+    "completed-orders-title": "الطلبات المكتملة",
+    "referral-title": "رمز الإحالة",
+    "referral-description": "ستكسب 5٪ من إجمالي السعر من الأشخاص الذين دعوتهم والذين يستخدمون إحالاتك.",
+    "share-link": "مشاركة الرابط",
+    "as-story": "كقصة",
+    "total-earn": "إجمالي الربح من الإحالات",
+    "wallet-title": "المحفظة",
+    "wallet-placeholder": "أدخل المبلغ الخاص بك",
+    "wallet-description": "رصيدك :",
+    "payment-btn": "دفع",
+    "switch-user-btn": "التبديل إلى المستخدم"
+  },
+  "new-order": {
+    "title": "قدم طلبًا جديدًا",
+    "description": "*قبل ملء النموذج، تأكد من أنك استخدمت قسم المحفظة ولديك أموال في حسابك.",
+    "step-one-title": "أضف @JoiniumBot كمسؤول في قناتك أو مجموعتك. ثم، قدم لنا اسم المستخدم أو معرف الدردشة.",
+    "step-two-title": "اختر نوع المشتركين الذين تريدهم",
+    "step-three-title": "اختر سعر العطاء",
+    "step-four-title": "اختر المدة الزمنية لبقاء المشتركين في قناتك أو مجموعتك",
+    "step-five-title": "إعدادات تأخير إعادة الانضمام",
+    "check-placeholder": "معرف الدردشة أو اسم المستخدم أو الرابط",
+    "check-btn": "تحقق"
+  },
+  "intro": [
+    {
+      "title": "مقدمة واختيار اللغة",
+      "description": "مرحبًا بك في Joinium، حيث يمكنك كسب المال عن طريق الانضمام إلى قنوات ومجموعات تليجرام أو تنمية جمهورك كصاحب عمل. يرجى اختيار لغتك المفضلة للبدء.",
+      "subtext": "اختر لغة ثم مرر للبدء في رحلتك مع Joinium!"
+    },
+    {
+      "title": "مرحبًا بك في Joinium!",
+      "description": "اكسب المال عن طريق الانضمام إلى قنوات ومجموعات تليجرام. اكتشف كيف يمكنك الاستفادة من منصتنا، سواء كنت مستخدمًا أو صاحب عمل.",
+      "subtext": "مرر لتتعرف أكثر على كيفية عمل Joinium!"
+    },
+    {
+      "title": "لوحة تحكم المستخدم",
+      "description": "إدارة ملفك الشخصي، الاشتراكات، والأرباح في مكان واحد. تابع تقدمك، اكسب الشارات، وشارك في التحديات لزيادة دخلك.",
+      "subtext": "مرر لاستكشاف المزيد من الميزات!"
+    },
+    {
+      "title": "لأصحاب الأعمال",
+      "description": "قم بإدارة حملاتك الإعلانية بأمان، واصل المزيد من المستخدمين، وتابع الأداء. منصتنا تضمن أن حملاتك محمية وفعالة.",
+      "subtext": "مرر لتتعرف على نظام الإحالة الخاص بنا!"
+    },
+    {
+      "title": "نظام الإحالة",
+      "description": "اكسب المزيد عن طريق دعوة الأصدقاء! احصل على نسبة مئوية من أرباحهم في الشهر الأول. كلما كسبوا أكثر، زاد ما تكسبه!",
+      "subtext": "مرر للبدء!"
+    },
+    {
+      "title": "ابدأ الآن!",
+      "description": "اختر مسارك: هل أنت هنا لكسب المال من الانضمام إلى القنوات، أم تريد تنمية جمهورك كصاحب عمل؟",
+      "subtext": "اختر دورك للبدء!"
+    }
+  ],
+  "user-dashboard": {
+    "accounts-title": "الحساب",
+    "normal-status-title": "عادي",
+    "parent-status-title": "الرئيسي",
+    "child-status-title": "الفرعي",
+    "wallet-title": "المحفظة",
+    "wallet-placeholder": "عنوان USDT-TON",
+    "wallet-save-btn": "حفظ",
+    "send-invite-title": "إرسال طلب دعوة لتعيين كحساب رئيسي",
+    "username-placeholder": "معرف المستخدم أو اسم المستخدم",
+    "referral-title": "رمز الإحالة",
+    "referral-description": "اكسب 5٪ من أرباح الإحالات في الشهر الأول.",
+    "share-link": "مشاركة الرابط",
+    "as-story": "كقصة",
+    "leave-notification-title": "إشعار المغادرة",
+    "nsfw-title": "عرض محتويات NSFW أو +18",
+    "total-child-accounts-title": "إجمالي الحسابات الفرعية",
+    "total-joined-all-time-title": "إجمالي الانضمامات على الإطلاق",
+    "total-earned-all-time-title": "إجمالي الأرباح على الإطلاق",
+    "total-earn-by-referrals-title": "إجمالي الأرباح من الإحالات",
+    "current-joinium-commission-title": "العمولة الحالية لـ Joinium",
+    "current-joinium-commission-description": "مع زيادة عدد الانضمامات أو النشاط، تنخفض نسبة العمولة. على سبيل المثال، إذا دفع صاحب القناة 1 دولار مقابل 1000 مشترك، فإن العمولة الخاصة بنا ستتراوح بين 10-25٪ اعتمادًا على فئة حسابك.",
+    "current-joinium-commission-description2": "عند إحالة شخص ما إلى Joinium باستخدام رابط الإحالة الخاص بك، ستحصل على 5٪ من إجمالي السعر الذي كسبه ذلك المستخدم في الشهر الأول من الشخص الذي دعوته.",
+    "switch-owner-btn": "التبديل إلى لوحة تحكم أصحاب الأعمال",
+    "toast-wallet-successfully-updated": "تم تحديث عنوان المحفظة بنجاح",
+    "toast-invite-successfully-updated": "تم تحديث المستخدم المدعو بنجاح",
+    "toast-settings-successfully-updated": "تم تحديث الإعدادات بنجاح"
+
+
+  }
+}

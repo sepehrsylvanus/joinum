@@ -1,0 +1,113 @@
+{
+  "menu": {
+    "home": "主页 (Zhǔyè)",
+    "dashboard": "仪表盘 (Yíbiǎo Pán)",
+    "settings": "设置 (Shezhi)"
+  },
+  "home": {
+    "nextbtn": "下一步",
+    "prevbtn": "上一步",
+    "userbtn": "我是用户",
+    "ownerbtn": "我是商家",
+    "langbtn": "选择语言"
+  },
+  "owner-dashboard": {
+    "title": "商家控制面板",
+    "orderbtn": "新订单",
+    "tab-active": "进行中",
+    "tab-completed": "已完成",
+    "tab-settings": "设置",
+    "order-title": "添加您的订单链接",
+    "order-link-title": "链接",
+    "order-amount-title": "金额",
+    "order-remains-title": "剩余",
+    "order-subscriber-title": "订阅者类型",
+    "settings-tab-title": "信息",
+    "total-orders-title": "总订单数",
+    "total-spent-title": "总花费",
+    "active-orders-title": "进行中的订单",
+    "completed-orders-title": "已完成的订单",
+    "referral-title": "推荐码",
+    "referral-description": "通过推荐邀请的用户，您将获得总价的5%。",
+    "share-link": "分享链接",
+    "as-story": "作为故事分享",
+    "total-earn": "通过推荐总收入",
+    "wallet-title": "钱包",
+    "wallet-placeholder": "输入金额",
+    "wallet-description": "您的余额：212.25 美元",
+    "payment-btn": "支付",
+    "switch-user-btn": "切换到用户"
+  },
+  "new-order": {
+    "title": "创建新订单",
+    "description": "*在填写表格之前，请确保您已使用钱包功能并且账户中有资金。",
+    "step-one-title": "将 @JoiniumBot 添加为您的频道或群组的管理员。然后提供用户名或 chat_id。",
+    "step-two-title": "选择您想要的订阅者类型",
+    "step-three-title": "选择您的出价价格",
+    "step-four-title": "选择订阅者在您频道或群组中停留的时间",
+    "step-five-title": "重新加入的延迟设置",
+    "check-placeholder": "chat-id 或用户名或链接",
+    "check-btn": "检查"
+  },
+  "intro": [
+    {
+      "title": "介绍与语言选择",
+      "description": "欢迎来到 Joinium，您可以通过加入 Telegram 频道和群组赚钱，或作为商家增长您的受众。请选择您喜欢的语言开始使用。",
+      "subtext": "选择语言，然后滑动开始您的 Joinium 之旅！"
+    },
+    {
+      "title": "欢迎来到 Joinium！",
+      "description": "通过加入 Telegram 频道和群组赚取收入。无论您是用户还是商家，发现如何从我们的平台中受益。",
+      "subtext": "滑动了解 Joinium 的工作原理！"
+    },
+    {
+      "title": "用户控制面板",
+      "description": "在一个地方管理您的个人资料、订阅和收入。跟踪您的进展，赚取徽章，并参与挑战以增加收入。",
+      "subtext": "滑动探索更多功能！"
+    },
+    {
+      "title": "商家专区",
+      "description": "安全管理您的广告活动，覆盖更多用户，并跟踪表现。我们的平台确保您的活动安全有效。",
+      "subtext": "滑动了解我们的推荐系统！"
+    },
+    {
+      "title": "推荐系统",
+      "description": "通过邀请朋友赚取更多！您将获得他们首月收入的百分比。他们赚得越多，您也赚得越多！",
+      "subtext": "滑动开始吧！"
+    },
+    {
+      "title": "开始吧！",
+      "description": "选择您的路径：您是来通过加入频道赚钱，还是想作为商家增长受众？",
+      "subtext": "选择您的角色开始吧！"
+    }
+  ],
+  "user-dashboard": {
+    "accounts-title": "账户",
+    "normal-status-title": "普通",
+    "parent-status-title": "主账户",
+    "child-status-title": "子账户",
+    "wallet-title": "钱包",
+    "wallet-placeholder": "USDT-TON 地址",
+    "wallet-save-btn": "保存",
+    "send-invite-title": "发送邀请请求以设为主账户",
+    "username-placeholder": "用户ID或用户名",
+    "referral-title": "推荐码",
+    "referral-description": "推荐的用户在首月赚取的总收入中获得 5%。",
+    "share-link": "分享链接",
+    "as-story": "作为故事分享",
+    "leave-notification-title": "离开通知",
+    "nsfw-title": "显示 NSFW 或 18+ 内容",
+    "total-child-accounts-title": "总子账户数",
+    "total-joined-all-time-title": "所有时间加入总数",
+    "total-earned-all-time-title": "所有时间赚取总数",
+    "total-earn-by-referrals-title": "通过推荐赚取的总收入",
+    "current-joinium-commission-title": "当前 Joinium 佣金",
+    "current-joinium-commission-description": "随着加入人数或活动的增加，佣金比例会下降。例如，如果频道所有者支付 1 美元购买 1000 个订阅者，根据您的账户类别，我们的佣金将在 10-25% 之间。",
+    "current-joinium-commission-description2": "当您通过专属推荐链接推荐某人到 Joinium，您将赚取该用户在首月从被邀请者赚取的总金额的 5%。",
+    "switch-owner-btn": "切换到商家控制面板",
+    "toast-wallet-successfully-updated": " 钱包地址更新成功",
+    "toast-invite-successfully-updated": "邀请用户更新成功",
+    "toast-settings-successfully-updated": "设置已成功更新"
+
+  }
+}
