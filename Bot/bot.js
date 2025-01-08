@@ -1,17 +1,17 @@
 const { Telegraf } = require("telegraf");
 const TOKEN = "7539867059:AAGVxoDyJelH39wlX3eYXvU4N0asP0NWNgU";
 const bot = new Telegraf(TOKEN);
-const url = "https://travel-main-app.vercel.app/en/intro";
+const url = "https://joinum-sepehrsylvanus-sshdev-projects.vercel.app/";
 
 // Middleware to parse initData
-bot.use((ctx: any, next: any) => {
+bot.use((ctx, next) => {
   if (ctx.message && ctx.message.web_app_data) {
     ctx.webAppData = ctx.message.web_app_data;
   }
   return next();
 });
 
-bot.start((ctx: any) => {
+bot.start((ctx) => {
   ctx.reply("Welcome", {
     reply_markup: {
       inline_keyboard: [
@@ -30,7 +30,7 @@ bot.start((ctx: any) => {
 });
 
 // Handle incoming messages containing web_app_data
-bot.on("message", (ctx: any) => {
+bot.on("message", (ctx) => {
   if (ctx.webAppData) {
     console.log("initData:", ctx.webAppData);
   } else {

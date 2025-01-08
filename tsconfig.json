@@ -23,7 +23,15 @@
     }
   },
 
-  "include": ["next-env.d.ts",    "order.d.ts",
-    "**/*.ts", "**/*.tsx", "types/**/*.ts", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "order.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "types/**/*.ts",
+    ".next/types/**/*.ts",
+    "Bot/bot.js",
+    "/types/global.d.ts"
+  ],
   "exclude": ["node_modules"]
 }
