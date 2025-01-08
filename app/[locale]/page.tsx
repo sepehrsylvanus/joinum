@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { handleNavigation } from "@/lib/navigation";
 import { useParams, useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+import { saveToken } from "@/server/actions/authActions";
 
 export default ({ local = "" }) => {
   const t = useTranslations("intro");
@@ -54,7 +55,9 @@ export default ({ local = "" }) => {
   function loginUserAs(role: string) {
     startTransition(async () => {
       const result = await loginAction(initData);
+      console.log(result.data.access_token);
       if (result) {
+        await saveToken(result.data.access_token);
         toast.success(t_login("user-success-login"));
         router.push(`${locale}/${role}`);
       } else {
