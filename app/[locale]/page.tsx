@@ -1,4 +1,5 @@
 "use client";
+import { NavLink } from "@/components/nav-link";
 import { SelectLang } from "@/components/select-lang";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,46 +10,43 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper/react";
-
 import Link from "next/link";
-import { loginAction } from "@/server/actions";
+import { inviteUserAsParentAction, loginAction } from "@/server/actions";
 import { IWebApp } from "@/types/telegram";
 import { toast } from "sonner";
+import { handleNavigation } from "@/lib/navigation";
 import { useParams, useRouter } from "next/navigation";
+import { MouseEvent } from "react";
 
-interface Props {
-  local?: string;
-}
-
-const Intro: React.FC<Props> = ({ local = "" }) => {
+export default ({ local = "" }) => {
   const t = useTranslations("intro");
   const t_login = useTranslations("user-login");
   const locale = useLocale();
   const params = useParams();
 
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState(1);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-  const [initData, setInitData] = useState("");
-  const h = useTranslations("home");
-  const swiperRef = useRef<SwiperType | null>(null);
-  const nextStep = () => {
-    swiperRef.current?.slideNext();
-  };
 
+  const h = useTranslations("home");
+  const swiperRef = useRef<any>(null);
+  const nextStep = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext(); // Move to next slide
+    }
+  };
   const prevStep = () => {
-    swiperRef.current?.slidePrev();
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev(); // Move to previous slide
+    }
   };
   const steps = [1, 2, 3, 4, 5, 6];
 
-  const [webApp, setWebApp] = useState<IWebApp | null>(null);
-
+  const [initData, setInitData] = useState("");
   useEffect(() => {
-    const intiData = window.Telegram.WebApp.initData;
-    setInitData(intiData);
+    const initData = window.Telegram.WebApp.initData;
+    setInitData(initData);
   }, []);
-
   useEffect(() => {
     console.log(initData);
   }, [initData]);
