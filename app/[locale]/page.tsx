@@ -26,7 +26,6 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
   const t_login = useTranslations("user-login");
   const locale = useLocale();
   const params = useParams();
-  const [data, setData] = useState<Record<string, any> | undefined>();
 
   const [step, setStep] = useState<number>(1);
   const [isPending, startTransition] = useTransition();
@@ -62,7 +61,8 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
 
     setData(initData);
   }, []);
-
+  const initData = window.Telegram.WebApp.initData;
+  console.log({ initData });
   function loginUserAs(role: string) {
     startTransition(async () => {
       const result = await loginAction(data);
@@ -75,107 +75,89 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
     });
   }
 
-  function createInitData(data) {
-    const queryString = Object.entries(data)
-      .map(([key, value]) => {
-        if (typeof value === "object") {
-          // Nested object, encode it as JSON
-          return `${key}=${encodeURIComponent(JSON.stringify(value))}`;
-        } else {
-          // Primitive value, encode directly
-          return `${key}=${encodeURIComponent(value)}`;
-        }
-      })
-      .join("&");
-
-    return queryString;
-  }
-
-  if (data) {
-    return (
-      <div className="p-4">
-        <div className="flex items-center justify-center gap-1.5">
-          {steps.map((index) => (
-            <span
-              key={index}
-              className={`h-2 w-6 rounded-full ${
-                step === index ? "bg-primary" : "bg-muted"
-              }`}
+  return (
+    <div className="p-4">
+      <div className="flex items-center justify-center gap-1.5">
+        {steps.map((index) => (
+          <span
+            key={index}
+            className={`h-2 w-6 rounded-full ${
+              step === index ? "bg-primary" : "bg-muted"
+            }`}
+          />
+        ))}
+      </div>
+      <SelectLang />
+      <Swiper
+        ref={swiperRef}
+        spaceBetween={50}
+        slidesPerView={1}
+        modules={[Navigation]}
+        onSlideChange={(swiper) => setStep(swiper.activeIndex + 1)}
+      >
+        {steps.map((stepNumber) => (
+          <SwiperSlide key={stepNumber}>
+            <Step
+              image={`/images/i${stepNumber}.png`}
+              title={t(`${stepNumber - 1}.title`)}
+              description={t(`${stepNumber - 1}.description`)}
+              subtext={t(`${stepNumber - 1}.subtext`)}
             />
-          ))}
-        </div>
-        <SelectLang />
-        <Swiper
-          ref={swiperRef}
-          spaceBetween={50}
-          slidesPerView={1}
-          modules={[Navigation]}
-          onSlideChange={(swiper) => setStep(swiper.activeIndex + 1)}
-        >
-          {steps.map((stepNumber) => (
-            <SwiperSlide key={stepNumber}>
-              <Step
-                image={`/images/i${stepNumber}.png`}
-                title={t(`${stepNumber - 1}.title`)}
-                description={t(`${stepNumber - 1}.description`)}
-                subtext={t(`${stepNumber - 1}.subtext`)}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {step < 6 ? (
-          <div className="mt-4 flex justify-between">
-            <Button
-              className={step === 1 ? "invisible" : "visible"}
-              variant={"ghost"}
-              onClick={prevStep}
-              disabled={step === 1}
-            >
-              {h("prevbtn")}
-            </Button>
-            <Button
-              variant={"ghost"}
-              className="gap-2"
-              onClick={nextStep}
-              disabled={step === 6}
-            >
-              {h("nextbtn")}
-              <ArrowLeft
-                className={cn(
-                  "size-4 rotate-180",
-                  locale === "fa" && "rotate-0",
-                  locale === "ar" && "rotate-0"
-                )}
-              />
-            </Button>
-          </div>
-        ) : (
-          <div className="mx-auto mt-2 grid w-64 gap-4">
-            <Button onClick={() => loginUserAs("user")} variant={"secondary"}>
-              {h("userbtn")}
-            </Button>
-            <Button onClick={() => loginUserAs("owner")} variant={"blue"}>
-              {h("ownerbtn")}
-            </Button>
-          </div>
-        )}
-        <div className="mt-4">
-          <p>{JSON.stringify(data)}</p>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {step < 6 ? (
+        <div className="mt-4 flex justify-between">
           <Button
-            onClick={() => {
-              navigator.clipboard
-                .writeText(createInitData(data))
-                .then(() => toast.success("Copied to clipboard!"))
-                .catch(() => toast.error("Failed to copy to clipboard."));
-            }}
-            variant="ghost"
+            className={step === 1 ? "invisible" : "visible"}
+            variant={"ghost"}
+            onClick={prevStep}
+            disabled={step === 1}
           >
-            Copy Data
+            {h("prevbtn")}
+          </Button>
+          <Button
+            variant={"ghost"}
+            className="gap-2"
+            onClick={nextStep}
+            disabled={step === 6}
+          >
+            {h("nextbtn")}
+            <ArrowLeft
+              className={cn(
+                "size-4 rotate-180",
+                locale === "fa" && "rotate-0",
+                locale === "ar" && "rotate-0"
+              )}
+            />
           </Button>
         </div>
+      ) : (
+        <div className="mx-auto mt-2 grid w-64 gap-4">
+          <Button onClick={() => loginUserAs("user")} variant={"secondary"}>
+            {h("userbtn")}
+          </Button>
+          <Button onClick={() => loginUserAs("owner")} variant={"blue"}>
+            {h("ownerbtn")}
+          </Button>
+        </div>
+      )}
+      <div className="mt-4">
+        <p>{JSON.stringify(data)}</p>
+        <Button
+          onClick={() => {
+            navigator.clipboard
+              .writeText(createInitData(data))
+              .then(() => toast.success("Copied to clipboard!"))
+              .catch(() => toast.error("Failed to copy to clipboard."));
+          }}
+          variant="ghost"
+        >
+          Copy Data
+        </Button>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 const Step: React.FC<{

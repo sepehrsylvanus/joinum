@@ -1,7 +1,7 @@
 const { Telegraf } = require("telegraf");
 const TOKEN = "7539867059:AAGVxoDyJelH39wlX3eYXvU4N0asP0NWNgU";
 const bot = new Telegraf(TOKEN);
-const url = "https://joinum-sepehrsylvanus-sshdev-projects.vercel.app/";
+const url = "https://joinum.vercel.app/";
 
 // Middleware to parse initData
 bot.use((ctx, next) => {
