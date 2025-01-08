@@ -55,7 +55,7 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
 
   function loginUserAs(role: string) {
     startTransition(async () => {
-      const result = await loginAction(data);
+      const result = await loginAction(initData);
       if (result) {
         toast.success(t_login("user-success-login"));
         router.push(`${locale}/${role}`);
