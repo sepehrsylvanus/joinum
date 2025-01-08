@@ -124,10 +124,10 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
         </div>
       ) : (
         <div className="mx-auto mt-2 grid w-64 gap-4">
-          <Button onClick={() => loginUserAs("user")} variant={"secondary"}>
+          <Button onClick={(e) => loginUserAs("user")} variant={"secondary"}>
             {h("userbtn")}
           </Button>
-          <Button onClick={() => loginUserAs("owner")} variant={"blue"}>
+          <Button onClick={(e) => loginUserAs("owner")} variant={"blue"}>
             {h("ownerbtn")}
           </Button>
         </div>
@@ -136,12 +136,17 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
   );
 };
 
-const Step: React.FC<{
+const Step = ({
+  image,
+  title,
+  description,
+  subtext,
+}: {
   image: string;
   title: string;
   description: string;
   subtext: string;
-}> = ({ image, title, description, subtext }) => (
+}) => (
   <section className="grid gap-2">
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -183,5 +188,3 @@ const Step: React.FC<{
     </motion.p>
   </section>
 );
-
-export default Intro;
