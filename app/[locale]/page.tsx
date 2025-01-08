@@ -30,7 +30,7 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
   const [step, setStep] = useState<number>(1);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
-
+  const [initData, setInitData] = useState("");
   const h = useTranslations("home");
   const swiperRef = useRef<SwiperType | null>(null);
   const nextStep = () => {
@@ -45,24 +45,14 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
   const [webApp, setWebApp] = useState<IWebApp | null>(null);
 
   useEffect(() => {
-    const firstLayerInitData = Object.fromEntries(
-      new URLSearchParams(window.Telegram?.WebApp?.initData || "")
-    );
-
-    const initData: Record<string, any> = {};
-
-    for (const key in firstLayerInitData) {
-      try {
-        initData[key] = JSON.parse(firstLayerInitData[key]);
-      } catch {
-        initData[key] = firstLayerInitData[key];
-      }
-    }
-
-    setData(initData);
+    const intiData = window.Telegram.WebApp.initData;
+    setInitData(intiData);
   }, []);
-  const initData = window.Telegram.WebApp.initData;
-  console.log({ initData });
+
+  useEffect(() => {
+    console.log(initData);
+  }, [initData]);
+
   function loginUserAs(role: string) {
     startTransition(async () => {
       const result = await loginAction(data);
@@ -142,20 +132,6 @@ const Intro: React.FC<Props> = ({ local = "" }) => {
           </Button>
         </div>
       )}
-      <div className="mt-4">
-        <p>{JSON.stringify(data)}</p>
-        <Button
-          onClick={() => {
-            navigator.clipboard
-              .writeText(createInitData(data))
-              .then(() => toast.success("Copied to clipboard!"))
-              .catch(() => toast.error("Failed to copy to clipboard."));
-          }}
-          variant="ghost"
-        >
-          Copy Data
-        </Button>
-      </div>
     </div>
   );
 };
