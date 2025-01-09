@@ -46,29 +46,36 @@ export async function getUserInfos() {
   }
 }
 
-export async function updateWalletAddress(walletAddress: string): Promise<{
-  data: walletUpdateAddress;
-  error: errorType;
+export async function updateWalletAddress(wallet_address: string): Promise<{
+  data: walletUpdateAddress | null;
+  error: errorType | null;
 }> {
+  const token = await getToken();
   try {
-    const res = await AXIOS.post("/users/updateWallet", {
-      wallet_address: walletAddress,
-    });
-    const { status, data, error } = res.data;
+    const res = await AXIOS.post(
+      "/users/updateWallet",
+      {
+        wallet_address,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const result = res.data;
 
     return {
-      data: data,
-      error: {
-        code: error?.code || null,
-        message: error?.message || "",
-      },
+      data: result,
+      error: null,
     };
-  } catch (err) {
+  } catch (err: any) {
     return {
-      data: { message: "" },
+      data: null,
       error: {
-        code: 500,
-        message: "try again later",
+        code: err.response?.data?.error?.code || 500,
+        message: err.response?.data?.error?.message || "try again later",
       },
     };
   }

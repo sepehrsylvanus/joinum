@@ -12,9 +12,8 @@ export async function changePassword(password: string) {
 }
 
 export async function updateWalletAddressAction(walletAddress: string) {
-  "use server";
-  const { data, error } = await updateWalletAddress(walletAddress);
-  return error.code == null;
+  const updatedWallet = await updateWalletAddress(walletAddress);
+  return updatedWallet;
 }
 
 export async function inviteUserAsParentAction(username: number) {
