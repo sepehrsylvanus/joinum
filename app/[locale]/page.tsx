@@ -18,6 +18,7 @@ import { handleNavigation } from "@/lib/navigation";
 import { useParams, useRouter } from "next/navigation";
 import { MouseEvent } from "react";
 import { saveToken } from "@/server/actions/authActions";
+import { useGetToken } from "@/hooks/useToken";
 
 export default ({ local = "" }) => {
   const t = useTranslations("intro");
@@ -27,6 +28,7 @@ export default ({ local = "" }) => {
 
   const [step, setStep] = useState(1);
   const [isPending, startTransition] = useTransition();
+  const { data: token, isLoading: tokenLoading } = useGetToken();
   const router = useRouter();
 
   const h = useTranslations("home");
@@ -48,14 +50,10 @@ export default ({ local = "" }) => {
     const initData = window.Telegram.WebApp.initData;
     setInitData(initData);
   }, []);
-  useEffect(() => {
-    console.log(initData);
-  }, [initData]);
 
   function loginUserAs(role: string) {
     startTransition(async () => {
       const result = await loginAction(initData);
-      console.log(result.data.access_token);
       if (result) {
         await saveToken(result.data.access_token);
         toast.success(t_login("user-success-login"));
@@ -65,76 +63,80 @@ export default ({ local = "" }) => {
       }
     });
   }
-
-  return (
-    <div className="p-4">
-      <div className="flex items-center justify-center gap-1.5">
-        {steps.map((index) => (
-          <span
-            key={index}
-            className={`h-2 w-6 rounded-full ${
-              step === index ? "bg-primary" : "bg-muted"
-            }`}
-          />
-        ))}
+  if (token) {
+    router.push(`/${locale}/user`);
+  }
+  if (!token && !tokenLoading) {
+    return (
+      <div className="p-4">
+        <div className="flex items-center justify-center gap-1.5">
+          {steps.map((index) => (
+            <span
+              key={index}
+              className={`h-2 w-6 rounded-full ${
+                step === index ? "bg-primary" : "bg-muted"
+              }`}
+            />
+          ))}
+        </div>
+        <SelectLang />
+        <Swiper
+          ref={swiperRef}
+          spaceBetween={50}
+          slidesPerView={1}
+          modules={[Navigation]}
+          onSlideChange={(swiper) => setStep(swiper.activeIndex + 1)}
+        >
+          {steps.map((stepNumber) => (
+            <SwiperSlide key={stepNumber}>
+              <Step
+                image={`/images/i${stepNumber}.png`}
+                title={t(`${stepNumber - 1}.title`)}
+                description={t(`${stepNumber - 1}.description`)}
+                subtext={t(`${stepNumber - 1}.subtext`)}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        {step < 6 ? (
+          <div className="mt-4 flex justify-between">
+            <Button
+              className={step === 1 ? "invisible" : "visible"}
+              variant={"ghost"}
+              onClick={prevStep}
+              disabled={step === 1}
+            >
+              {h("prevbtn")}
+            </Button>
+            <Button
+              variant={"ghost"}
+              className="gap-2"
+              onClick={nextStep}
+              disabled={step === 6}
+            >
+              {h("nextbtn")}
+              <ArrowLeft
+                className={cn(
+                  "size-4 rotate-180",
+                  locale === "fa" && "rotate-0",
+                  locale === "ar" && "rotate-0"
+                )}
+              />
+            </Button>
+          </div>
+        ) : (
+          <div className="mx-auto mt-2 grid w-64 gap-4">
+            <Button onClick={(e) => loginUserAs("user")} variant={"secondary"}>
+              {h("userbtn")}
+            </Button>
+            <Button onClick={(e) => loginUserAs("owner")} variant={"blue"}>
+              {h("ownerbtn")}
+            </Button>
+          </div>
+        )}
       </div>
-      <SelectLang />
-      <Swiper
-        ref={swiperRef}
-        spaceBetween={50}
-        slidesPerView={1}
-        modules={[Navigation]}
-        onSlideChange={(swiper) => setStep(swiper.activeIndex + 1)}
-      >
-        {steps.map((stepNumber) => (
-          <SwiperSlide key={stepNumber}>
-            <Step
-              image={`/images/i${stepNumber}.png`}
-              title={t(`${stepNumber - 1}.title`)}
-              description={t(`${stepNumber - 1}.description`)}
-              subtext={t(`${stepNumber - 1}.subtext`)}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      {step < 6 ? (
-        <div className="mt-4 flex justify-between">
-          <Button
-            className={step === 1 ? "invisible" : "visible"}
-            variant={"ghost"}
-            onClick={prevStep}
-            disabled={step === 1}
-          >
-            {h("prevbtn")}
-          </Button>
-          <Button
-            variant={"ghost"}
-            className="gap-2"
-            onClick={nextStep}
-            disabled={step === 6}
-          >
-            {h("nextbtn")}
-            <ArrowLeft
-              className={cn(
-                "size-4 rotate-180",
-                locale === "fa" && "rotate-0",
-                locale === "ar" && "rotate-0"
-              )}
-            />
-          </Button>
-        </div>
-      ) : (
-        <div className="mx-auto mt-2 grid w-64 gap-4">
-          <Button onClick={(e) => loginUserAs("user")} variant={"secondary"}>
-            {h("userbtn")}
-          </Button>
-          <Button onClick={(e) => loginUserAs("owner")} variant={"blue"}>
-            {h("ownerbtn")}
-          </Button>
-        </div>
-      )}
-    </div>
-  );
+    );
+  }
 };
 
 const Step = ({

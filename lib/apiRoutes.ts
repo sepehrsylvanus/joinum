@@ -2,10 +2,17 @@ import apiClient from "@/lib/axiosInstance";
 import { errorType } from "@/types/error";
 import { UserInfo } from "@/app/[locale]/user/_components/user-info";
 import { UserStatus } from "@/app/[locale]/user/_components/user-status";
+import { AXIOS } from "@/utils/axiosInstance";
+import { getToken } from "@/server/actions/authActions";
 
 export async function getOrders() {
+  const token = await getToken();
   try {
-    const res = await apiClient.get("/api/v1/orders");
+    const res = await AXIOS.get("/api/v1/orders", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const { status, data, error } = res.data;
 
     return {
