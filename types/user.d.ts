@@ -2,7 +2,7 @@ type UserDetailsProps = {
   name: string;
   id: string;
 };
-type UserStatus = "normal" | "parent" | "child";
+type UserStatus = "Normal" | "Parent" | "Child";
 type UserStatusProps = {
   status: UserStatus;
   children?: ReactNode; // Allow children to be passed to the component

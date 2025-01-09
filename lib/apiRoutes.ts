@@ -1,14 +1,11 @@
-import apiClient from "@/lib/axiosInstance";
 import { errorType } from "@/types/error";
-import { UserInfo } from "@/app/[locale]/user/_components/user-info";
-import { UserStatus } from "@/app/[locale]/user/_components/user-status";
 import { AXIOS } from "@/utils/axiosInstance";
 import { getToken } from "@/server/actions/authActions";
 
 export async function getOrders() {
   const token = await getToken();
   try {
-    const res = await AXIOS.get("/api/v1/orders", {
+    const res = await AXIOS.get("/orders", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -33,40 +30,19 @@ export async function getOrders() {
   }
 }
 
-export async function getUserInfos(): Promise<{
-  data: userInfo;
-  error: errorType;
-}> {
-  try {
-    const res = await apiClient.get("/api/v1/users/info");
-    const { status, data, error } = res.data;
+export async function getUserInfos() {
+  const token = await getToken();
 
-    return {
-      data: {
-        ...data,
-        account_type: data.account_type.toString().toLowerCase(),
+  try {
+    const res = await AXIOS.get("/users/info", {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      error: {
-        code: error?.code || null,
-        message: error?.message || "",
-      },
-    };
-  } catch (err) {
-    return {
-      data: {
-        account_type: "normal",
-        total_child_accounts: 0,
-        total_joined: 0,
-        total_earned: 0,
-        total_earned_by_refferal: 0,
-        wallet_address: null,
-        current_commission: 0,
-      },
-      error: {
-        code: 500,
-        message: "try again later",
-      },
-    };
+    });
+    return res.data;
+  } catch (err: any) {
+    console.log(err.message);
+    throw new Error(err.message);
   }
 }
 
@@ -75,7 +51,7 @@ export async function updateWalletAddress(walletAddress: string): Promise<{
   error: errorType;
 }> {
   try {
-    const res = await apiClient.post("/api/v1/users/updateWallet", {
+    const res = await AXIOS.post("/users/updateWallet", {
       wallet_address: walletAddress,
     });
     const { status, data, error } = res.data;
@@ -104,7 +80,7 @@ export async function inviteAsParentAccount(username: string): Promise<{
 }> {
   let res = null;
   try {
-    res = await apiClient.post("/api/v1/users/sendParentInvite", {
+    res = await AXIOS.post("/users/sendParentInvite", {
       parent_user_id: 5536316184,
     });
 
@@ -133,7 +109,7 @@ export async function getUserBalance(): Promise<{
   error: errorType;
 }> {
   try {
-    const res = await apiClient.get("/api/v1/users/balance");
+    const res = await AXIOS.get("/users/balance");
     const { status, data, error } = res.data;
 
     return {
@@ -161,7 +137,7 @@ export async function updateSettings(
   settings: settings
 ): Promise<{ data: settings; error: errorType }> {
   try {
-    const res = await apiClient.post("/api/v1/users/updateSettings", {
+    const res = await AXIOS.post("/users/updateSettings", {
       send_notification: settings.send_notification,
       show_nsfw: settings.show_nsfw,
     });
@@ -193,7 +169,7 @@ export async function getOwnerInfos(): Promise<{
   error: errorType;
 }> {
   try {
-    const res = await apiClient.get("/api/v1/owners/info");
+    const res = await AXIOS.get("/owners/info");
     const { status, data, error } = res.data;
     return {
       data: data,
@@ -224,7 +200,7 @@ export async function getOwnerOrders(
   orderType: ownerOrderType
 ): Promise<{ data: ownerOrder[]; error: errorType }> {
   try {
-    const res = await apiClient.get(`/api/v1/orders/${orderType}`);
+    const res = await AXIOS.get(`/orders/${orderType}`);
     const { status, data, error } = res.data;
 
     return {
@@ -249,7 +225,7 @@ export async function postLogin(
   initData: string
 ): Promise<{ data: userLogin; error: errorType }> {
   try {
-    const res = await apiClient.post("/api/v1/auth/login", {
+    const res = await AXIOS.post("/auth/login", {
       initData: initData,
     });
 
@@ -264,7 +240,7 @@ export async function postBoomarkList(
   orders: number[] = []
 ): Promise<{ data: { message: string }; error: errorType }> {
   try {
-    const res = await apiClient.post("/api/v1/users/createAddlist", {
+    const res = await AXIOS.post("/users/createAddlist", {
       order_ids: orders,
     });
     console.log("res", res);

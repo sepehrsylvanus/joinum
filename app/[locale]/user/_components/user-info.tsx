@@ -1,22 +1,24 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { InfoIcon, User2 } from 'lucide-react';
-import {getCacheUserInfos} from "@/lib/cacheData";
-import {capitalizeWords} from "@/lib/utils";
+} from "@/components/ui/drawer";
+import { InfoIcon, User2 } from "lucide-react";
+import { getCacheUserInfos } from "@/lib/cacheData";
+import { capitalizeWords } from "@/lib/utils";
+import { getUserInfos } from "@/lib/apiRoutes";
 
 export async function UserInfo() {
-  const {data:userInfos,error} = await getCacheUserInfos();
+  const userDetails = await getUserInfos();
+  const userInfos = userDetails.data;
 
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <Button variant={'outline'} size={'icon'}>
+        <Button variant={"outline"} size={"icon"}>
           <InfoIcon className="size-4" />
         </Button>
       </DrawerTrigger>
@@ -29,23 +31,27 @@ export async function UserInfo() {
         </DrawerHeader>
         <ul className="list-disc p-4 text-foreground/80 text-xs [&>li]:leading-8">
           <li>
-            Your Account is:{' '}
-            <span className="font-semibold text-foreground">{capitalizeWords(userInfos.account_type)}</span>
+            Your Account is:{" "}
+            <span className="font-semibold text-foreground">
+              {capitalizeWords(userInfos.account_type)}
+            </span>
           </li>
           <li>
-            you are earning from{' '}
-            <span className="font-semibold text-foreground">$ {userInfos.total_earned}</span> active
-            joined
+            you are earning from{" "}
+            <span className="font-semibold text-foreground">
+              $ {userInfos.total_earned}
+            </span>{" "}
+            active joined
           </li>
           <li>
-            Your account free space:{' '}
+            Your account free space:{" "}
             <span className="font-semibold text-foreground">n</span>
           </li>
           <li>
             Bookmarked: <span className="font-semibold text-foreground">n</span>
           </li>
           <li>
-            Random generate addlists:{' '}
+            Random generate addlists:{" "}
             <span className="font-semibold text-foreground">n</span>
           </li>
         </ul>
