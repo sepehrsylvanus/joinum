@@ -17,10 +17,10 @@ export async function updateWalletAddressAction(walletAddress: string) {
   return error.code == null;
 }
 
-export async function inviteUserAsParentAction(username: string) {
-  "use server";
-  const { data, error } = await inviteAsParentAccount(username);
-  return error.code == null;
+export async function inviteUserAsParentAction(username: number) {
+  const inviteRequest = await inviteAsParentAccount(username);
+  console.log({ inviteRequest });
+  return inviteRequest;
 }
 
 export async function updateSettingsAction(settings: settings) {

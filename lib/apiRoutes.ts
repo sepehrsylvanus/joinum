@@ -74,31 +74,37 @@ export async function updateWalletAddress(walletAddress: string): Promise<{
   }
 }
 
-export async function inviteAsParentAccount(username: string): Promise<{
-  data: walletUpdateAddress;
-  error: errorType;
+export async function inviteAsParentAccount(parent_user_id: number): Promise<{
+  data: walletUpdateAddress | null;
+  error: errorType | null;
 }> {
+  const token = await getToken();
   let res = null;
   try {
-    res = await AXIOS.post("/users/sendParentInvite", {
-      parent_user_id: 5536316184,
-    });
-
-    const { status, data, error } = res.data;
-
-    return {
-      data: data,
-      error: {
-        code: error?.code || null,
-        message: error?.message || "",
+    res = await AXIOS.post(
+      "/users/sendParentInvite",
+      {
+        parent_user_id,
       },
-    };
-  } catch (err) {
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const result = res.data;
+
     return {
-      data: { message: "" },
+      data: result,
+      error: null,
+    };
+  } catch (err: any) {
+    return {
+      data: null,
       error: {
-        code: 500,
-        message: "try again later",
+        code: err.response?.data?.error?.code || 500,
+        message: err.response?.data?.error?.message || "try again later",
       },
     };
   }
