@@ -10,11 +10,11 @@ import { InfoIcon, User2 } from "lucide-react";
 import { getCacheUserInfos } from "@/lib/cacheData";
 import { capitalizeWords } from "@/lib/utils";
 import { getUserInfos } from "@/lib/apiRoutes";
+import { getUserStats } from "@/server/actions";
 
 export async function UserInfo() {
-  const userDetails = await getUserInfos();
-  const userInfos = userDetails.data;
-
+  const userStats = await getUserStats();
+  console.log(userStats);
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -33,26 +33,28 @@ export async function UserInfo() {
           <li>
             Your Account is:{" "}
             <span className="font-semibold text-foreground">
-              {capitalizeWords(userInfos.account_type)}
+              {userStats.account_type}
             </span>
           </li>
           <li>
             you are earning from{" "}
             <span className="font-semibold text-foreground">
-              $ {userInfos.total_earned}
+              $ {userStats.active_orders}
             </span>{" "}
             active joined
           </li>
           <li>
             Your account free space:{" "}
-            <span className="font-semibold text-foreground">n</span>
+            <span className="font-semibold text-foreground">
+              {userStats.account_free_space}
+            </span>
           </li>
-          <li>
-            Bookmarked: <span className="font-semibold text-foreground">n</span>
-          </li>
+
           <li>
             Random generate addlists:{" "}
-            <span className="font-semibold text-foreground">n</span>
+            <span className="font-semibold text-foreground">
+              {userStats.generated_addlists}
+            </span>
           </li>
         </ul>
       </DrawerContent>

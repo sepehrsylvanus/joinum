@@ -6,6 +6,8 @@ import {
   updateSettings,
   updateWalletAddress,
 } from "@/lib/apiRoutes";
+import { AXIOS } from "@/utils/axiosInstance";
+import { getToken } from "./authActions";
 
 export async function changePassword(password: string) {
   // run ro server
@@ -38,3 +40,18 @@ export async function saveBoomarkListAction(orders: number[] = []) {
   console.log("saveBoomarkListAction data", data);
   return error.code == null;
 }
+
+export const getUserStats = async () => {
+  try {
+    const token = await getToken();
+    const res = await AXIOS.get("/users/stats", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data.data;
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
+};
