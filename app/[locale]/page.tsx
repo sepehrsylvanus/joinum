@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { handleNavigation } from "@/lib/navigation";
 import { useParams, useRouter } from "next/navigation";
 import { MouseEvent } from "react";
-import { saveToken } from "@/server/actions/authActions";
+import { saveToken, saveUserAndId } from "@/server/actions/authActions";
 import { useGetToken } from "@/hooks/useToken";
 
 export default ({ local = "" }) => {
@@ -56,6 +56,11 @@ export default ({ local = "" }) => {
       const result = await loginAction(initData);
       if (result) {
         await saveToken(result.data.access_token);
+        await saveUserAndId({
+          username: result.data.user.username,
+          user_id: result.data.user.user_id,
+        });
+
         toast.success(t_login("user-success-login"));
         router.push(`${locale}/${role}`);
       } else {

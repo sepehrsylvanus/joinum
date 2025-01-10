@@ -224,7 +224,12 @@ export async function getOwnerOrders(
   orderType: ownerOrderType
 ): Promise<{ data: ownerOrder[]; error: errorType }> {
   try {
-    const res = await AXIOS.get(`/orders/${orderType}`);
+    const token = await getToken();
+    const res = await AXIOS.get(`/orders/${orderType}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const { status, data, error } = res.data;
 
     return {

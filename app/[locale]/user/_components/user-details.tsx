@@ -1,8 +1,9 @@
-
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import {getUserBalance} from "@/lib/apiRoutes";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getUserBalance } from "@/lib/apiRoutes";
+import { getUserAndId } from "@/server/actions/authActions";
+import { useSelector } from "react-redux";
 
 const UserBalance = async () => {
   // const [loading, setLoading] = useState(true);
@@ -24,28 +25,29 @@ const UserBalance = async () => {
   //   getBalance();
   // }, []);
 
-  const {data:userBalance,error} = await getUserBalance();
+  const { data: userBalance, error } = await getUserBalance();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-border/40 p-4">
+      {/*<Skeleton className="h-5 w-full rounded-md" />*/}
 
-         {/*<Skeleton className="h-5 w-full rounded-md" />*/}
+      <p className="text-muted-foreground text-xs">
+        Balance:
+        <span className="pl-4 font-medium text-foreground text-sm">
+          ${userBalance.balance}
+        </span>
+      </p>
 
-        <p className="text-muted-foreground text-xs">
-          Balance:
-          <span className="pl-4 font-medium text-foreground text-sm">
-            ${userBalance.balance}
-          </span>
-        </p>
-
-      <Button className="rounded-full px-6 text-xs" size={'sm'}>
+      <Button className="rounded-full px-6 text-xs" size={"sm"}>
         withraw
       </Button>
     </div>
   );
 };
 
-export const UserDetails = ({ id, name }: UserDetailsProps) => {
+export const UserDetails = async () => {
+  const userDetails = await getUserAndId();
+
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex flex-1 items-center gap-4">
@@ -53,8 +55,10 @@ export const UserDetails = ({ id, name }: UserDetailsProps) => {
           <AvatarImage src="https://github.com/shadcn.png" />
         </Avatar>
         <div className="space-y-1">
-          <p className="font-semibold text-xs">@soheilghanbary</p>
-          <p className="text-muted-foreground text-xs">13800707</p>
+          <p className="font-semibold text-xs">@{userDetails?.username}</p>
+          <p className="text-muted-foreground text-xs">
+            {userDetails?.user_id}
+          </p>
         </div>
       </div>
       <UserBalance />

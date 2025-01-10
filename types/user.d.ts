@@ -1,6 +1,6 @@
 type UserDetailsProps = {
-  name: string;
-  id: string;
+  username: string | undefined;
+  id: number;
 };
 type UserStatus = "Normal" | "Parent" | "Child";
 type UserStatusProps = {
@@ -18,8 +18,8 @@ type userInfo = {
   wallet_address: WalletAddress;
   current_commission: number;
   settings: {
-    show_nsfw: 0 | 1;
-    send_notification: 0 | 1;
+    show_nsfw: boolean;
+    send_notification: boolean;
   };
 };
 

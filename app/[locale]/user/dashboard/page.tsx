@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { InfoIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { UserDetails } from "../_components/user-details";
 import { UserInvite } from "../_components/user-invite";
 import { UserReferral } from "../_components/user-referral";
@@ -9,6 +9,7 @@ import { UserUpload } from "../_components/user-upload";
 import { UserWallet } from "../_components/user-wallet";
 import UserSettings from "@/components/ui/UserSettings";
 import { getUserInfos } from "@/lib/apiRoutes";
+import Link from "next/link";
 
 export default async () => {
   const user = await getUserInfos();
@@ -22,10 +23,12 @@ export default async () => {
 
 function Dashoard({ userInfo }: { userInfo: userInfo }) {
   const t = useTranslations("user-dashboard");
-  console.log(userInfo);
+  const locale = useLocale();
+  console.log({ userInfo });
+
   return (
     <>
-      <UserDetails id="20240929" name="Soheil Ghanbary" />
+      <UserDetails />
       <UserStatus status={userInfo?.account_type} />
       <UserWallet address={userInfo?.wallet_address} />
       <UserInvite />
@@ -56,7 +59,10 @@ function Dashoard({ userInfo }: { userInfo: userInfo }) {
             {t("current-joinium-commission-title")}:{" "}
             {userInfo?.current_commission}%
           </p>
-          <Button size={"icon"} className="size-8 rounded-full">
+          <Button
+            size={"icon"}
+            className="size-8 rounded-full pointer-events-none cursor-default"
+          >
             <InfoIcon className="size-5" />
           </Button>
         </div>
@@ -71,9 +77,11 @@ function Dashoard({ userInfo }: { userInfo: userInfo }) {
           </p>
         </div>
       </div>
-      <Button className="mt-6 w-full rounded-xl">
-        {t("switch-owner-btn")}
-      </Button>
+      <Link href={`/${locale}/owner`}>
+        <Button className="mt-6 w-full rounded-xl">
+          {t("switch-owner-btn")}
+        </Button>
+      </Link>
     </>
   );
 }
