@@ -3,6 +3,7 @@ import { QueryProvider } from "@/components/providers/query-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
 import { cn } from "@/lib/utils";
+import ClientProviders from "@/providers/ClientProviders";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -62,7 +63,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
               defaultTheme="light"
               disableTransitionOnChange
             >
-              <div className="container">{children}</div>
+              <ClientProviders>
+                <div className="container">{children}</div>
+              </ClientProviders>
 
               <ToastProvider />
             </ThemeProvider>
