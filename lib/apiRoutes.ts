@@ -1,7 +1,8 @@
 import { errorType } from "@/types/error";
 import { AXIOS } from "@/utils/axiosInstance";
 import { getToken } from "@/server/actions/authActions";
-
+type Settings = { send_notification: boolean; show_nsfw: boolean };
+type ErrorType = { code: number | null; message: string };
 export async function getOrders() {
   const token = await getToken();
   try {
@@ -147,17 +148,27 @@ export async function getUserBalance(): Promise<{
 }
 
 export async function updateSettings(
-  settings: settings
-): Promise<{ data: settings; error: errorType }> {
+  settings: Settings
+): Promise<{ data: Settings; error: ErrorType }> {
   try {
-    const res = await AXIOS.post("/users/updateSettings", {
-      send_notification: settings.send_notification,
-      show_nsfw: settings.show_nsfw,
-    });
-    const { status, data, error } = res.data;
+    const token = await getToken();
+    const res = await AXIOS.post(
+      "/users/updateSettings",
+      {
+        send_notification: settings.send_notification,
+        show_nsfw: settings.show_nsfw,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res.data);
+    const { data, error } = res.data;
 
     return {
-      data: data,
+      data,
       error: {
         code: error?.code || null,
         message: error?.message || "",

@@ -22,7 +22,7 @@ export default async () => {
 
 function Dashoard({ userInfo }: { userInfo: userInfo }) {
   const t = useTranslations("user-dashboard");
-
+  console.log(userInfo);
   return (
     <>
       <UserDetails id="20240929" name="Soheil Ghanbary" />
@@ -32,7 +32,7 @@ function Dashoard({ userInfo }: { userInfo: userInfo }) {
       <UserReferral />
       <UserUpload />
       <hr className="my-4" />
-      <UserSettings />
+      <UserSettings settings={userInfo.settings} />
       <hr className="my-4" />
       <div className="grid grid-cols-2 gap-4">
         <Button className="rounded-full" size={"sm"} variant={"secondary"}>

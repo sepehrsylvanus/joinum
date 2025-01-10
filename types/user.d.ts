@@ -17,6 +17,10 @@ type userInfo = {
   total_earned_by_refferal: number;
   wallet_address: WalletAddress;
   current_commission: number;
+  settings: {
+    show_nsfw: 0 | 1;
+    send_notification: 0 | 1;
+  };
 };
 
 type userBalance = {

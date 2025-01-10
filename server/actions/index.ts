@@ -23,8 +23,8 @@ export async function inviteUserAsParentAction(username: number) {
 }
 
 export async function updateSettingsAction(settings: settings) {
-  const { data, error } = await updateSettings(settings);
-  return error.code == null;
+  const updatedSetting = await updateSettings(settings);
+  return updatedSetting;
 }
 
 export async function loginAction(initData: string) {
