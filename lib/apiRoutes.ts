@@ -123,7 +123,12 @@ export async function getUserBalance(): Promise<{
   error: errorType;
 }> {
   try {
-    const res = await AXIOS.get("/users/balance");
+    const token = await getToken();
+    const res = await AXIOS.get("/users/balance", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const { status, data, error } = res.data;
 
     return {
