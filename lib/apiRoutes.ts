@@ -193,7 +193,12 @@ export async function getOwnerInfos(): Promise<{
   error: errorType;
 }> {
   try {
-    const res = await AXIOS.get("/owners/info");
+    const token = await getToken();
+    const res = await AXIOS.get("/owners/info", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const { status, data, error } = res.data;
     return {
       data: data,
