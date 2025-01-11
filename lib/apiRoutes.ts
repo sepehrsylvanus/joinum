@@ -305,3 +305,19 @@ export async function postBoomarkList(
     };
   }
 }
+
+export const fetchOwnerSettings = async () => {
+  try {
+    const token = await getToken();
+    const res = await AXIOS.get("/settings", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const settings = res.data.data;
+    return settings;
+  } catch (error: any) {
+    console.log(error.message);
+    throw new Error(error.message);
+  }
+};
