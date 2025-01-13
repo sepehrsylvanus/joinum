@@ -7,6 +7,7 @@ import { LinkIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { InfoModal } from './info-modal';
+import { useFormContext } from 'react-hook-form';
 
 const useCheckChannel = () => {
   return useMutation({
@@ -27,6 +28,7 @@ const useCheckChannel = () => {
 }
 
 export function OrderLink() {
+  const {register} = useFormContext()
   const link = useOrderValue().link;
   const setOrder = useSetOrder();
   const [checkBox, setCheckBox] = useState(false);
@@ -65,6 +67,7 @@ export function OrderLink() {
           onChange={(e) =>
             setOrder((prev) => ({ ...prev, link: e.target.value }))
           }
+          
         />
         <Button disabled={isPending} type="button" onClick={onCheckChannel}>
           {t('check-btn')}
