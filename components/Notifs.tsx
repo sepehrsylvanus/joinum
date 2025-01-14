@@ -45,7 +45,7 @@ const Notifs = () => {
               index !== notifications.length - 1
                 ? "border-b-2 border-white pb-4"
                 : ""
-            }`}
+            } ${notification.unread ? "hidden" : ""}`}
           >
             <div className="w-full flex justify-between items-stretch">
               <div className="w-3/4 overflow-hidden">
