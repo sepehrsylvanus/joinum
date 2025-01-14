@@ -17,6 +17,9 @@ import {
   useFormContext,
   SubmitHandler,
 } from "react-hook-form";
+import { useState } from "react";
+import { toast } from "sonner";
+import { validateLink } from "@/actions/orders";
 const useSubmitOrder = () => {
   const order = useOrderValue();
   return useMutation({
@@ -35,11 +38,23 @@ const useSubmitOrder = () => {
 };
 
 export default () => {
+  const [allowToOrder, setAllowToOrder] = useState(false);
   const methods = useForm();
   type Inputs = {};
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const t = useTranslations("new-order");
   const { mutateAsync, isPending } = useSubmitOrder();
+
+  const ifLinkvalidate = async (link: string) => {
+    try {
+      const validate = await validateLink(link);
+      if (validate) {
+        setAllowToOrder(true);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
   return (
     <FormProvider {...methods}>
       <section>
@@ -51,7 +66,7 @@ export default () => {
             </p>
           </section>
           <hr className="my-4" />
-          <OrderLink />
+          <OrderLink ifLinkvalidate={ifLinkvalidate} />
           <hr className="my-4" />
           <OrderPrice />
           <hr className="my-4" />
@@ -107,7 +122,7 @@ export default () => {
           <hr className="my-4" />
           <OrderYear />
           <Button
-            disabled={isPending}
+            disabled={isPending || !allowToOrder}
             onClick={() => mutateAsync()}
             variant={"blue"}
             className="mt-4 w-full"
