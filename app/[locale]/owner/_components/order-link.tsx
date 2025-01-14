@@ -1,22 +1,22 @@
-import { TelegramIcon } from '@/components/icons/telegram';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useOrderValue, useSetOrder } from '@/hooks/use-order';
-import { useMutation } from '@tanstack/react-query';
-import { LinkIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-import { InfoModal } from './info-modal';
-import { useFormContext } from 'react-hook-form';
+import { TelegramIcon } from "@/components/icons/telegram";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useOrderValue, useSetOrder } from "@/hooks/use-order";
+import { useMutation } from "@tanstack/react-query";
+import { LinkIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { FC, useState } from "react";
+import { InfoModal } from "./info-modal";
+import { useFormContext } from "react-hook-form";
 
 const useCheckChannel = () => {
   return useMutation({
-    mutationKey: ['check-channel'],
+    mutationKey: ["check-channel"],
     mutationFn: async (link: string) => {
-      const res = await fetch('/api/v1/orders/checkLink', {
-        method: 'POST',
+      const res = await fetch("/api/v1/orders/checkLink", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.BASE_TOKEN}`,
         },
         body: JSON.stringify({ link }),
@@ -24,25 +24,27 @@ const useCheckChannel = () => {
       const result = await res.json();
       return result.data;
     },
-  })
-}
-
-export function OrderLink() {
-  const {register} = useFormContext()
+  });
+};
+type OrderLinkProps = {
+  ifLinkvalidate: (link: string) => Promise<void>;
+};
+export const OrderLink: FC<OrderLinkProps> = ({ ifLinkvalidate }) => {
+  const { register } = useFormContext();
   const link = useOrderValue().link;
   const setOrder = useSetOrder();
   const [checkBox, setCheckBox] = useState(false);
-  const t = useTranslations('new-order');
-  const { mutateAsync, isPending } = useCheckChannel()
+  const t = useTranslations("new-order");
+  const { mutateAsync, isPending } = useCheckChannel();
   const onCheckChannel = async () => {
-    setCheckBox(!checkBox)
-    const res = await mutateAsync(link)
-  }
+    setCheckBox(!checkBox);
+    const res = await mutateAsync(link);
+  };
 
   return (
     <section className="grid gap-4">
       <h2 className="heading">
-        1. {t('step-one-title')}
+        1. {t("step-one-title")}
         <InfoModal
           body={
             <ul className="list-decimal space-y-2 p-4">
@@ -62,15 +64,14 @@ export function OrderLink() {
       <div className="flex items-center gap-2">
         <Input
           className="flex-1 bg-muted/50"
-          placeholder={t('check-placeholder')}
+          placeholder={t("check-placeholder")}
           value={link}
           onChange={(e) =>
             setOrder((prev) => ({ ...prev, link: e.target.value }))
           }
-          
         />
         <Button disabled={isPending} type="button" onClick={onCheckChannel}>
-          {t('check-btn')}
+          {t("check-btn")}
         </Button>
       </div>
       {Boolean(checkBox) && (
@@ -92,4 +93,4 @@ export function OrderLink() {
       )}
     </section>
   );
-}
+};
