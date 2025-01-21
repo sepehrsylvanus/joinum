@@ -59,6 +59,7 @@ export default ({ local = "" }) => {
         await saveUserAndId({
           username: result.data.user.username,
           user_id: result.data.user.user_id,
+          name: `${result.data.user.first_name} ${result.data.user.last_name}`,
         });
 
         toast.success(t_login("user-success-login"));

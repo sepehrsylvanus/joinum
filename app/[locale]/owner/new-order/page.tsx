@@ -39,6 +39,8 @@ const useSubmitOrder = () => {
 
 export default () => {
   const [allowToOrder, setAllowToOrder] = useState(false);
+
+  const [checkBox, setCheckBox] = useState(false);
   const methods = useForm();
   type Inputs = {};
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
@@ -50,7 +52,9 @@ export default () => {
       const validate = await validateLink(link);
       if (validate) {
         setAllowToOrder(true);
+        setCheckBox(true);
       }
+      toast.success("Your link approved, now you can submit order");
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -66,7 +70,7 @@ export default () => {
             </p>
           </section>
           <hr className="my-4" />
-          <OrderLink ifLinkvalidate={ifLinkvalidate} />
+          <OrderLink ifLinkvalidate={ifLinkvalidate} checkBox={checkBox} />
           <hr className="my-4" />
           <OrderPrice />
           <hr className="my-4" />
