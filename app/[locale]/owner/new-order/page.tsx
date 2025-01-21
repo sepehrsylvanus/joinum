@@ -20,9 +20,6 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { validateLink } from "@/actions/orders";
-import { useState } from "react";
-import { toast } from "sonner";
-import { validateLink } from "@/actions/orders";
 const useSubmitOrder = () => {
   const order = useOrderValue();
   return useMutation({
@@ -42,7 +39,6 @@ const useSubmitOrder = () => {
 
 export default () => {
   const [allowToOrder, setAllowToOrder] = useState(false);
-
   const [checkBox, setCheckBox] = useState(false);
   const methods = useForm();
   type Inputs = {};
@@ -56,8 +52,8 @@ export default () => {
       if (validate) {
         setAllowToOrder(true);
         setCheckBox(true);
+        toast.success("You link successfuly validated");
       }
-      toast.success("Your link approved, now you can submit order");
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -74,9 +70,6 @@ export default () => {
           </section>
           <hr className="my-4" />
           <OrderLink ifLinkvalidate={ifLinkvalidate} checkBox={checkBox} />
-          <hr className="my-4" />
-          <OrderPrice />
-          <hr className="my-4" />
           <OrderDuration />
           <hr className="my-4" />
           <OrderRejoin />
@@ -129,7 +122,6 @@ export default () => {
           <hr className="my-4" />
           <OrderYear />
           <Button
-            disabled={isPending || !allowToOrder}
             disabled={isPending || !allowToOrder}
             onClick={() => mutateAsync()}
             variant={"blue"}
