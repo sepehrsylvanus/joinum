@@ -20,6 +20,9 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { validateLink } from "@/actions/orders";
+import { useState } from "react";
+import { toast } from "sonner";
+import { validateLink } from "@/actions/orders";
 const useSubmitOrder = () => {
   const order = useOrderValue();
   return useMutation({
@@ -126,6 +129,7 @@ export default () => {
           <hr className="my-4" />
           <OrderYear />
           <Button
+            disabled={isPending || !allowToOrder}
             disabled={isPending || !allowToOrder}
             onClick={() => mutateAsync()}
             variant={"blue"}

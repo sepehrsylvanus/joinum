@@ -15,4 +15,3 @@ export const validateLink = async (link: string) => {
     throw new Error(errorMessage);
   }
 };
-export const submitOrder = async () => {};
