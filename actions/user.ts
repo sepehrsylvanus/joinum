@@ -20,3 +20,8 @@ export const getUserInfo = async () => {
 
   return user;
 };
+export const getBalance = async () => {
+  const res = await AXIOS.get("/users/balance");
+  const balance = res.data.data.balance;
+  return balance;
+};

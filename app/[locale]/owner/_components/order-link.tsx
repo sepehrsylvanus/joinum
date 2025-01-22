@@ -7,7 +7,7 @@ import { LinkIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { FC, useState } from "react";
 import { InfoModal } from "./info-modal";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { getUserInfo } from "@/actions/user";
 import { useGetUserAndId, userGetUserInfo } from "@/hooks/useUser";
 
@@ -33,13 +33,16 @@ type OrderLinkProps = {
   checkBox: boolean;
 };
 export const OrderLink: FC<OrderLinkProps> = ({ ifLinkvalidate, checkBox }) => {
-  const link = useOrderValue().link;
-  const setOrder = useSetOrder();
-
+  const { getValues, control } = useFormContext();
+  const link = getValues("link");
   const t = useTranslations("new-order");
   const { mutateAsync, isPending } = useCheckChannel();
   const { data: userInfo, isLoading: userInfoLoading } = userGetUserInfo();
   const { data: userAndId, isLoading: userAndIdLoading } = useGetUserAndId();
+  const linkWatch = useWatch({
+    control,
+    name: "link",
+  });
   if (!userInfoLoading && !userAndIdLoading) {
     if (userInfo && userAndId) {
       return (
@@ -63,18 +66,21 @@ export const OrderLink: FC<OrderLinkProps> = ({ ifLinkvalidate, checkBox }) => {
             />
           </h2>
           <div className="flex items-center gap-2">
-            <Input
-              className="flex-1 bg-muted/50"
-              placeholder={t("check-placeholder")}
-              value={link}
-              onChange={(e) =>
-                setOrder((prev) => ({ ...prev, link: e.target.value }))
-              }
+            <Controller
+              control={control}
+              name="link"
+              render={({ field }) => (
+                <Input
+                  className="flex-1 bg-muted/50"
+                  placeholder={t("check-placeholder")}
+                  {...field}
+                />
+              )}
             />
             <Button
               disabled={isPending}
               type="button"
-              onClick={() => ifLinkvalidate(link)}
+              onClick={() => ifLinkvalidate(linkWatch)}
             >
               {t("check-btn")}
             </Button>

@@ -9,39 +9,70 @@ import { InfoModal } from "./info-modal";
 import { AXIOS } from "@/utils/axiosInstance";
 import { getToken } from "@/server/actions/authActions";
 import { fetchOwnerSettings } from "@/lib/apiRoutes";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 type priceType = {
   normal_sub_price: number;
   premium_sub_price: number;
 };
 const PremiumSubscribers = ({ price }: { price?: number }) => {
-  const [orderPrice, setOrderPrice] = useState(price);
+  const { control } = useFormContext();
+
   return (
-    <TextField
-      type="number"
-      label="Premium subscribers $"
-      placeholder="Premium subscribers $"
-      value={orderPrice}
-      onChange={(e) => setOrderPrice(Number(e.target.value))}
+    <Controller
+      name="premium_sub_price"
+      control={control}
+      render={({ field }) => (
+        <TextField
+          type="number"
+          label="Premium subscribers $"
+          placeholder="Premium subscribers $"
+          value={field.value}
+          onChange={(e) => field.onChange(Number(e.target.value))}
+          min={price}
+        />
+      )}
     />
   );
 };
 
 const NormalSubscribers = ({ price }: { price?: number }) => {
-  const [priceOption, setPriceOption] = useState(price);
+  const { control } = useFormContext();
+  const normalPrice = useWatch({
+    control,
+    name: "normal_sub_price",
+  });
+  console.log({ normalPrice });
   return (
-    <TextField
-      type="number"
-      label="Normal subscribers $"
-      placeholder="Normal subscribers $"
-      value={priceOption}
-      onChange={(e) => setPriceOption(Number(e.target.value))}
+    <Controller
+      name="normal_sub_price"
+      control={control}
+      render={({ field }) => (
+        <TextField
+          type="number"
+          label="Normal subscribers $"
+          placeholder="Normal subscribers $"
+          value={field.value}
+          onChange={(e) => field.onChange(Number(e.target.value))}
+          min={price}
+        />
+      )}
     />
   );
 };
 
 export function OrderPrice() {
+  const { control, getValues } = useFormContext();
+  const quantity = useWatch({
+    control,
+    name: "quantity",
+  });
+  const quantityInit = getValues("quantity");
+  console.log({ quantityInit });
   const t = useTranslations("new-order");
-  const [showType, setShowType] = useState("premium");
+  const showType = useWatch({
+    control,
+    name: "type",
+  });
   const [prices, setPrices] = useState<priceType>();
   useEffect(() => {
     const fetchPrices = async () => {
@@ -59,24 +90,30 @@ export function OrderPrice() {
   return (
     <section className="grid gap-4">
       <h2 className="heading">2. {t("step-two-title")}:</h2>
-      <RadioGroup
-        defaultValue={showType}
-        onValueChange={(value) => setShowType(value)}
-        className="flex items-center gap-8"
-      >
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="premium" id="premium" />
-          <Label htmlFor="premium">Premium</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="normal" id="normal" />
-          <Label htmlFor="normal">Normal</Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="both" id="both" />
-          <Label htmlFor="both">Both</Label>
-        </div>
-      </RadioGroup>
+      <Controller
+        name="type"
+        control={control}
+        render={({ field }) => (
+          <RadioGroup
+            value={field.value}
+            onValueChange={field.onChange}
+            className="flex items-center gap-8"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="Premium" id="premium" />
+              <Label htmlFor="premium">Premium</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="Normal" id="normal" />
+              <Label htmlFor="normal">Normal</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="Both" id="both" />
+              <Label htmlFor="both">Both</Label>
+            </div>
+          </RadioGroup>
+        )}
+      />
       <h2 className="heading">
         3. {t("step-three-title")}:
         <InfoModal
@@ -96,18 +133,30 @@ export function OrderPrice() {
           }
         />
       </h2>
-      {prices && showType === "premium" && (
+      {prices && showType === "Premium" && (
         <PremiumSubscribers price={prices?.premium_sub_price} />
       )}
-      {prices && showType === "normal" && (
+      {prices && showType === "Normal" && (
         <NormalSubscribers price={prices?.normal_sub_price} />
       )}
-      {prices && showType === "both" && (
+      {prices && showType === "Both" && (
         <div className="grid grid-cols-2 gap-4">
           <PremiumSubscribers price={prices?.premium_sub_price} />
           <NormalSubscribers price={prices?.normal_sub_price} />
         </div>
       )}
+      <Controller
+        name="quantity"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            type="number"
+            label="Quantity"
+            value={field.value}
+            onChange={(e) => field.onChange(Number(e.target.value))}
+          />
+        )}
+      />
     </section>
   );
 }

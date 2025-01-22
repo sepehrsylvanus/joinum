@@ -1,6 +1,9 @@
 import { Checkbox } from "@/components/ui/checkbox";
+import { useSetOrder } from "@/hooks/use-order";
 
 export function OrderYear() {
+  const setOrder = useSetOrder();
+
   return (
     <section className="grid gap-4">
       <h2 className="heading">
@@ -45,5 +48,5 @@ export function OrderYear() {
         </div>
       </div>
     </section>
-  )
+  );
 }

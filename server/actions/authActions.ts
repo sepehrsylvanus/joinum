@@ -1,11 +1,11 @@
 "use server";
 
 import { cookies } from "next/headers";
-type USERANDID = {
+export interface USERANDID {
   username: string;
   user_id: number;
   name: string;
-};
+}
 export const saveToken = async (token: string) => {
   const cookieStore = await cookies();
 
@@ -39,5 +39,5 @@ export const saveUserAndId = async (userDetails: {
 export const getUserAndId = async () => {
   const cookieStore = await cookies();
   const userDetailsJSON = cookieStore.get("userDetails")?.value;
-  return userDetailsJSON ? (JSON.parse(userDetailsJSON) as USERANDID) : null;
+  return JSON.parse(userDetailsJSON!) as USERANDID;
 };

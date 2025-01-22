@@ -12,6 +12,8 @@ import { UserSettings } from "./_components/user-settings";
 import Server from "@/components/test/Server";
 import OwnerOrderList from "@/components/ui/OwnerOrderList";
 import { getOwnerInfos, getOwnerOrders } from "@/lib/apiRoutes";
+import { useGetUserAndId } from "@/hooks/useUser";
+import { getUserAndId, USERANDID } from "@/server/actions/authActions";
 
 export default async () => {
   const { data: activeOrders, error: activeErrorOrder } = await getOwnerOrders(
@@ -19,12 +21,14 @@ export default async () => {
   );
   const { data: completedOrders, error: completedErrorOrder } =
     await getOwnerOrders("myCompletedOrders");
+  const userAndId = await getUserAndId()!;
   console.log({ completedOrders });
   return (
     <>
       <OwnerPage
         activeOrders={activeOrders}
         completedOrders={completedOrders}
+        userAndId={userAndId}
       />
     </>
   );
@@ -33,9 +37,11 @@ export default async () => {
 function OwnerPage({
   activeOrders = [],
   completedOrders = [],
+  userAndId,
 }: {
   activeOrders?: ownerOrder[];
   completedOrders?: ownerOrder[];
+  userAndId: USERANDID;
 }) {
   const locale = useLocale();
   const t = useTranslations("owner-dashboard");
@@ -49,8 +55,10 @@ function OwnerPage({
               <AvatarImage src="https://github.com/shadcn.png" />
             </Avatar>
             <div className="space-y-1">
-              <p className="font-semibold text-xs">@soheilghanbary</p>
-              <p className="text-muted-foreground text-xs">13800707</p>
+              <p className="font-semibold text-xs">@{userAndId.username}</p>
+              <p className="text-muted-foreground text-xs">
+                {userAndId.user_id}
+              </p>
             </div>
           </div>
           <Button

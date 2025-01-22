@@ -1,4 +1,4 @@
-import { getUserInfo } from "@/actions/user";
+import { getBalance, getUserInfo } from "@/actions/user";
 import { getUserAndId } from "@/server/actions/authActions";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,6 +18,15 @@ export const useGetUserAndId = () => {
     queryFn: async () => {
       const userAndId = await getUserAndId();
       return userAndId;
+    },
+  });
+};
+export const useGetBalance = () => {
+  return useQuery({
+    queryKey: ["getBalance"],
+    queryFn: async () => {
+      const balance = await getBalance();
+      return balance;
     },
   });
 };
