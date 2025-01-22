@@ -47,3 +47,16 @@ export const readAllNotifs = async () => {
     throw new Error(errorMessage);
   }
 };
+export const rejectChildRequest = async (child_user_id: number) => {
+  try {
+    const res = await AXIOS.post("/users/rejectChildRequest", {
+      child_user_id,
+    });
+    if (res.data.success) {
+      return true;
+    }
+  } catch (error: any) {
+    const errorMessage = error.response.data.error.message;
+    throw new Error(errorMessage);
+  }
+};

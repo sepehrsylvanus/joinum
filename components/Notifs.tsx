@@ -1,5 +1,9 @@
 "use client";
-import { acceptChildRequest, readNotif } from "@/actions/notifications";
+import {
+  acceptChildRequest,
+  readNotif,
+  rejectChildRequest,
+} from "@/actions/notifications";
 import {
   useDeleteNotifs,
   useGetNotifications,
@@ -31,7 +35,17 @@ const Notifs = () => {
         toast.success("Child request accepted");
       }
     } catch (error: any) {
-      toast.error(error.message);
+      toast.error(error);
+    }
+  };
+  const rejectingChildeRequest = async (child_user_id: number) => {
+    try {
+      const reject = await rejectChildRequest(child_user_id);
+      if (reject) {
+        toast.success("Child request rejected");
+      }
+    } catch (error: any) {
+      toast.error(error);
     }
   };
   if (notificationsLoading) return <div>Notifications loading...</div>;
@@ -76,14 +90,25 @@ const Notifs = () => {
               </div>
             </div>
             {notification.data.child_user_id && (
-              <Button
-                className="mt-4"
-                onClick={() =>
-                  accpetingChildRequest(notification.data.child_user_id)
-                }
-              >
-                Confirm Request
-              </Button>
+              <div className="flex flex-col">
+                <Button
+                  className="mt-4"
+                  onClick={() =>
+                    accpetingChildRequest(notification.data.child_user_id)
+                  }
+                >
+                  Confirm Request
+                </Button>
+                <Button
+                  variant={"destructive"}
+                  className="mt-4"
+                  onClick={() =>
+                    rejectChildRequest(notification.data.child_user_id)
+                  }
+                >
+                  Confirm Request
+                </Button>
+              </div>
             )}
             {notification.data.addlist && (
               <Link

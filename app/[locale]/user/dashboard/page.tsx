@@ -24,7 +24,6 @@ export default async () => {
 function Dashoard({ userInfo }: { userInfo: userInfo }) {
   const t = useTranslations("user-dashboard");
   const locale = useLocale();
-  console.log({ userInfo });
 
   return (
     <>
