@@ -12,7 +12,7 @@ import { getUserInfos } from "@/lib/apiRoutes";
 import Link from "next/link";
 
 export default async () => {
-  const user = await getUserInfos();
+  const user = (await getUserInfos()) || [];
   console.log({ user });
   return (
     <>
@@ -22,6 +22,7 @@ export default async () => {
 };
 
 function Dashoard({ userInfo }: { userInfo: userInfo }) {
+  console.log("🚀 ~ Dashoard ~ userInfo:", userInfo);
   const t = useTranslations("user-dashboard");
   const locale = useLocale();
 

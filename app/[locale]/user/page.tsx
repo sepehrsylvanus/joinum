@@ -69,8 +69,8 @@ export default async () => {
   return (
     <div>
       <BookmarkProvider>
-        <ProjectCard />
-        <hr className="my-4" />
+        {/* <ProjectCard />
+        <hr className="my-4" /> */}
         <PaymentList orders={orders} />
       </BookmarkProvider>
     </div>
