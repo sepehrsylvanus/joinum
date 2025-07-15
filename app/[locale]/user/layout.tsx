@@ -1,9 +1,7 @@
-import type { PropsWithChildren } from 'react';
-import { UserHeader } from './_components/header';
+import type { PropsWithChildren } from "react";
+import { UserHeader } from "./_components/header";
 
-
-export default  async function UserLayout({ children }: PropsWithChildren) {
-
+export default async function UserLayout({ children }: PropsWithChildren) {
   return (
     <section className="container min-h-dvh">
       <UserHeader />

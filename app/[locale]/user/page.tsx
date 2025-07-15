@@ -22,7 +22,9 @@ import PaymentItem from "@/app/[locale]/user/_components/PaymentItem";
 import PaymentList from "@/app/[locale]/user/_components/PaymentList";
 import { BookmarkProvider } from "@/contexts/BookmarkContext";
 import ProjectCard from "@/app/[locale]/user/_components/ProjectCard";
+import BookmarkButton from "./BookmarkButton";
 
+// Information Modal Component
 const InformantionModal = () => (
   <Sheet>
     <SheetTrigger asChild>
@@ -63,15 +65,17 @@ const InformantionModal = () => (
   </Sheet>
 );
 
+// Main Page Component
 export default async () => {
   const { data: orders = [], error } = await getOrders();
 
   return (
-    <div>
+    <div className="relative">
       <BookmarkProvider>
         {/* <ProjectCard />
         <hr className="my-4" /> */}
         <PaymentList orders={orders} />
+        <BookmarkButton />
       </BookmarkProvider>
     </div>
   );
