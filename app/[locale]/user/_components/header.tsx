@@ -24,9 +24,9 @@ export function UserHeader() {
             />
           </Button>
         </NavLink>
-        <Button variant={"outline"} size={"icon"}>
+        {/* <Button variant={"outline"} size={"icon"}>
           <Link2Icon className="size-4" />
-        </Button>
+        </Button> */}
         <UserInfo />
         <NavLink href={"/user/dashboard"}>
           <Avatar className="ring-2 ring-amber-500">
