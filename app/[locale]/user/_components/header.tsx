@@ -6,8 +6,11 @@ import { UserInfo } from "./user-info";
 import { HeaderButtonLink } from "./header-button-link";
 import Image from "next/image";
 import Link from "next/link";
+import { getUserAndId } from "@/server/actions/authActions";
 
-export function UserHeader() {
+export async function UserHeader() {
+  const userDetails = await getUserAndId();
+  console.log("🚀 ~ UserHeader ~ userDetails:", userDetails);
   return (
     <header className="border-b">
       <nav className="flex items-center justify-between gap-2 px-4 py-3">
@@ -30,7 +33,9 @@ export function UserHeader() {
         <UserInfo />
         <NavLink href={"/user/dashboard"}>
           <Avatar className="ring-2 ring-amber-500">
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage
+              src={userDetails.photo_url ?? "https://github.com/shadcn.png"}
+            />
           </Avatar>
         </NavLink>
       </nav>

@@ -54,12 +54,14 @@ export default ({ local = "" }) => {
   function loginUserAs(role: string) {
     startTransition(async () => {
       const result = await loginAction(initData);
+      console.log("🚀 ~ startTransition ~ result:", result);
       if (result) {
         await saveToken(result.data.access_token);
         await saveUserAndId({
           username: result.data.user.username,
           user_id: result.data.user.user_id,
           name: `${result.data.user.first_name} ${result.data.user.last_name}`,
+          photo_url: result.data.user.photo_url,
         });
 
         toast.success(t_login("user-success-login"));

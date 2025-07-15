@@ -5,6 +5,7 @@ export interface USERANDID {
   username: string;
   user_id: number;
   name: string;
+  photo_url: string;
 }
 export const saveToken = async (token: string) => {
   const cookieStore = await cookies();
@@ -26,6 +27,7 @@ export const saveUserAndId = async (userDetails: {
   username: string;
   user_id: number;
   name: string;
+  photo_url: string;
 }) => {
   const cookieStore = await cookies();
   cookieStore.set("userDetails", JSON.stringify(userDetails), {

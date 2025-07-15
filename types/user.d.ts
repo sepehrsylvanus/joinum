@@ -40,6 +40,7 @@ type userLogin = {
     referral_code: string;
     balance: number;
     roll: null;
+    photo_url: string;
   };
   access_token: string;
   expires_in: number;
