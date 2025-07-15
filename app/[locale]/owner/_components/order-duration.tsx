@@ -45,12 +45,12 @@ export function OrderDuration() {
             onValueChange={field.onChange}
             className="flex flex-row flex-wrap gap-4"
           >
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <RadioGroupItem value="30" id="renew" />
               <Label htmlFor="renew">
                 Renew monthly from wallet (recommended )
               </Label>
-            </div>
+            </div> */}
             <div className="flex items-center gap-2">
               <RadioGroupItem value="7" id="1week" />
               <Label htmlFor="1week">1 Week</Label>
