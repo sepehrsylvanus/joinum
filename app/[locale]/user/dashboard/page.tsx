@@ -12,7 +12,7 @@ import { getUserInfos } from "@/lib/apiRoutes";
 import Link from "next/link";
 
 export default async () => {
-  const user = (await getUserInfos()) || [];
+  const user = await getUserInfos();
   console.log({ user });
   return (
     <>
@@ -22,7 +22,6 @@ export default async () => {
 };
 
 function Dashoard({ userInfo }: { userInfo: userInfo }) {
-  console.log("🚀 ~ Dashoard ~ userInfo:", userInfo);
   const t = useTranslations("user-dashboard");
   const locale = useLocale();
 
@@ -35,7 +34,7 @@ function Dashoard({ userInfo }: { userInfo: userInfo }) {
       <UserReferral />
       <UserUpload />
       <hr className="my-4" />
-      <UserSettings settings={userInfo.settings} />
+      <UserSettings settings={userInfo?.settings} />
       <hr className="my-4" />
       <div className="grid grid-cols-2 gap-4">
         <Button className="rounded-full" size={"sm"} variant={"secondary"}>

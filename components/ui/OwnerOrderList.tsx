@@ -16,10 +16,10 @@ export default async function OwnerOrderList({
           <FilesIcon className="size-4" />
           {t("order-list-title")}
         </h2>
-        <Button variant={"outline"} className="gap-2 rounded-full">
+        {/* <Button variant={"outline"} className="gap-2 rounded-full">
           <FilePlus className="size-4" />
           {t("order-title")}
-        </Button>
+        </Button> */}
       </nav>
       <OwnerOrder orders={orders} />
     </section>

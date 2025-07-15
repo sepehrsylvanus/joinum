@@ -65,7 +65,7 @@ const InformantionModal = () => (
 
 export default async () => {
   const { data: orders = [], error } = await getOrders();
-  console.log({ orders });
+
   return (
     <div>
       <BookmarkProvider>

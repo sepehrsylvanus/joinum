@@ -34,7 +34,7 @@ const UserBalance = async () => {
       <p className="text-muted-foreground text-xs">
         Balance:
         <span className="pl-4 font-medium text-foreground text-sm">
-          ${userBalance.balance}
+          ${userBalance?.balance}
         </span>
       </p>
 
@@ -50,7 +50,7 @@ export const UserDetails = async () => {
 
   return (
     <div className="flex items-center justify-between gap-4">
-      <div className="flex flex-1 flex-col items-center gap-4">
+      <div className="flex rflex-1 flex-col items-center gap-4">
         <Avatar className="size-14 ring-2 ring-amber-500">
           <AvatarImage src="https://github.com/shadcn.png" />
         </Avatar>
