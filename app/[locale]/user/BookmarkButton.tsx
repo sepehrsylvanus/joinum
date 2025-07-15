@@ -37,11 +37,11 @@ const BookmarkButton = () => {
     >
       <Button
         variant="default"
-        className="w-[95%] bg-black text-white rounded-lg py-3 text-lg font-semibold"
+        className="w-[95%] bg-black text-white rounded-lg py-3  "
         onClick={handleSaveBookmark} // Replace with actual navigation or action
       >
         <BookmarkIcon className="mr-2 size-5" />
-        View Bookmarks ({bookmarkedOrders.size})
+        Create addlist ({bookmarkedOrders.size})
       </Button>
     </motion.div>
   );
