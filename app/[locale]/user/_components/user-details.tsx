@@ -52,7 +52,9 @@ export const UserDetails = async () => {
     <div className="flex items-center justify-between gap-4">
       <div className="flex rflex-1 flex-col items-center gap-4">
         <Avatar className="size-14 ring-2 ring-amber-500">
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage
+            src={userDetails.photo_url ?? "https://github.com/shadcn.png"}
+          />
         </Avatar>
         <div className="space-y-1">
           <p className="font-semibold text-xs">@{userDetails?.username}</p>

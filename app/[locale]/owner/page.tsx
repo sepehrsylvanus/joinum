@@ -45,6 +45,7 @@ function OwnerPage({
 }) {
   const locale = useLocale();
   const t = useTranslations("owner-dashboard");
+
   return (
     <section>
       <OwnerHeader isBack={false} title={t("title")} />
@@ -52,7 +53,9 @@ function OwnerPage({
         <div className="flex items-center gap-4">
           <div className="flex flex-1 items-center gap-4">
             <Avatar className="size-14 ring-2 ring-amber-500">
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage
+                src={userAndId.photo_url ?? "https://github.com/shadcn.png"}
+              />
             </Avatar>
             <div className="space-y-1">
               <p className="font-semibold text-xs">@{userAndId.username}</p>

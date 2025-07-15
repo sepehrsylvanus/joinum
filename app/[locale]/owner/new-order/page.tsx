@@ -25,6 +25,8 @@ import { useGetBalance } from "@/hooks/useUser";
 import { useGetSetting } from "@/hooks/useApp";
 import { getSetting } from "@/actions";
 import { link } from "fs";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Loader } from "lucide-react";
 const useSubmitOrder = () => {
   const order = useOrderValue();
   return useMutation({
@@ -45,7 +47,8 @@ const useSubmitOrder = () => {
 export default () => {
   const [allowToOrder, setAllowToOrder] = useState(false);
   const [checkBox, setCheckBox] = useState(false);
-  const { data: balance } = useGetBalance();
+  const { data: balance, isLoading: balanceLoading } = useGetBalance();
+  console.log("🚀 ~ balance:", balance);
   const { data: settings } = useGetSetting();
   console.log({ settings });
   type OrderType = {
@@ -199,7 +202,13 @@ export default () => {
           <OrderLanguage />
           <hr className="my-4" />
 
-          {balance && (
+          {balanceLoading && (
+            <div className="flex justify-center">
+              <Loader className="animate-spin text-blue-500" />
+            </div>
+          )}
+
+          {!balanceLoading && balance && (
             <>
               <Button
                 // disabled={isPending || !allowToOrder}
