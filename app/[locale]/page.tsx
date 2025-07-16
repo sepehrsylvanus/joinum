@@ -66,6 +66,7 @@ export default ({ local = "" }) => {
 
         toast.success(t_login("user-success-login"));
         router.push(`${locale}/${role}`);
+        console.log("Went to page");
       } else {
         toast.error(t_login("user-fail-login"));
       }

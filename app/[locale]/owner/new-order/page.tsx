@@ -208,13 +208,14 @@ export default () => {
             </div>
           )}
 
-          {!balanceLoading && balance && (
+          {!balanceLoading && (
             <>
               <Button
-                // disabled={isPending || !allowToOrder}
+                disabled={balance >= 0}
                 onClick={methods.handleSubmit(onSubmit)}
                 variant={"blue"}
-                className="mt-4 w-full"
+                className="mt-4 w-full
+                "
               >
                 {calculateOrderPrice(
                   quantity,
